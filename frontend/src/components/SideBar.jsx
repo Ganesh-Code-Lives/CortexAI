@@ -1,7 +1,7 @@
 import React from 'react'
 import { Coins, LogOut, Menu, MessageSquare, PanelLeftIcon, PanelRight, PenBoxIcon, PenSquare, Plus, User, X } from "lucide-react"
-import { useState } from 'react'
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { getConversations } from '../features/getConversations'
 import { useDispatch, useSelector } from 'react-redux'
 import { addConversation, setConversations, setSelectedConversation } from '../redux/conversationSlice'
@@ -11,6 +11,7 @@ import logOut from '../features/logOut'
 import { setUserdata } from '../redux/userSlice'
 import BillingDrawer from './BillingDrawer'
 function SideBar() {
+    const navigate = useNavigate()
     const [collapsed, setCollapsed] = useState(false)
     const dispatch = useDispatch()
     const [imageError, setImageError] = useState(false)
@@ -218,6 +219,7 @@ function SideBar() {
                                     onClick={() => {
                                         logOut();
                                         dispatch(setUserdata(null))
+                                        navigate('/')
                                     }}
                                 >
                                     <LogOut size={16} />
